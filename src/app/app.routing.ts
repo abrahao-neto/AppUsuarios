@@ -8,6 +8,7 @@ import { RecuperarSenhaComponent } from "./components/pages/recuperar-senha/recu
 
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'autenticar' },
   { path: 'autenticar', component: AutenticarComponent },
   { path: 'criar-conta', component: CriarContaComponent },
   { path: 'recuperar-senha', component: RecuperarSenhaComponent }
@@ -19,5 +20,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
 
 
