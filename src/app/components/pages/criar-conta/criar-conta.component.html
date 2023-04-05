@@ -1,0 +1,40 @@
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title text-center mb-4">Criação de Conta de Usuários</h4>
+          <hr />
+          <form>
+            <div class="mb-3">
+              <label for="nome" class="form-label">Nome do usuário</label>
+              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail">
+            </div>
+            <div class="mb-3">
+              <label for="telefone" class="form-label">Telefone</label>
+              <input type="text" class="form-control" id="telefone" placeholder="Digite seu telefone">
+            </div>
+            <div class="mb-3">
+              <label for="senha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+            </div>
+            <div class="mb-3">
+              <label for="senhaConfirmacao" class="form-label">Confirme a Senha</label>
+              <input type="password" class="form-control" id="senhaConfirmacao" placeholder="Confirme sua senha">
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary">Realizar Cadastro</button>
+            </div>
+          </form>
+          <div class="text-center mt-3">
+            <a [routerLink]="['/autenticar']">Voltar</a> para a página de autenticação.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
