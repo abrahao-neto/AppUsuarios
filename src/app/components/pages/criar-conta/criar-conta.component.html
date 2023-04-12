@@ -1,35 +1,96 @@
-<div class="container mt-2">
+<div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-md-5">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title text-center mb-4">Criação de Conta de Usuários</h4>
           <hr />
-          <form>
+
+
+          <div class="text-center text-success">
+            <h5>{{mensagem_sucesso}}</h5>
+          </div>
+
+
+          <div class="text-center text-danger">
+            <h5>{{mensagem_erro}}</h5>
+          </div>
+
+
+          <form [formGroup]="formCriarConta" (ngSubmit)="onSubmit()">
+
+
             <div class="mb-3">
               <label for="nome" class="form-label">Nome do usuário</label>
-              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+              <input type="text" class="form-control" id="nome" placeholder="Digite seu nome" formControlName="nome">
+              <span class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+                <span *ngIf="form.nome.errors.required">
+                  Por favor, informe o nome.
+                </span>
+                <span *ngIf="form.nome.errors.pattern">
+                  Por favor, um nome de usuário válido.
+                </span>
+              </span>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail">
+              <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail"
+                formControlName="email">
+              <span class="text-danger" *ngIf="form.email.touched && form.email.invalid">
+                <span *ngIf="form.email.errors.required">
+                  Por favor, informe o email.
+                </span>
+                <span *ngIf="form.email.errors.email">
+                  Por favor, um endereço de email válido.
+                </span>
+              </span>
             </div>
             <div class="mb-3">
               <label for="telefone" class="form-label">Telefone</label>
-              <input type="text" class="form-control" id="telefone" placeholder="Digite seu telefone">
+              <input type="text" class="form-control" id="telefone" placeholder="Digite seu telefone"
+                formControlName="telefone">
+              <span class="text-danger" *ngIf="form.telefone.touched && form.telefone.invalid">
+                <span *ngIf="form.telefone.errors.required">
+                  Por favor, informe o telefone.
+                </span>
+                <span *ngIf="form.telefone.errors.pattern">
+                  Por favor, o telefone com somente 11 dígitos.
+                </span>
+              </span>
             </div>
             <div class="mb-3">
               <label for="senha" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+              <input type="password" class="form-control" id="senha" placeholder="Digite sua senha"
+                formControlName="senha">
+              <span class="text-danger" *ngIf="form.senha.touched && form.senha.invalid">
+                <span *ngIf="form.senha.errors.required">
+                  Por favor, informe a senha.
+                </span>
+                <span *ngIf="form.senha.errors.pattern">
+                  Por favor, informe uma senha forte.
+                </span>
+              </span>
             </div>
             <div class="mb-3">
               <label for="senhaConfirmacao" class="form-label">Confirme a Senha</label>
-              <input type="password" class="form-control" id="senhaConfirmacao" placeholder="Confirme sua senha">
+              <input type="password" class="form-control" id="senhaConfirmacao" placeholder="Confirme sua senha"
+                formControlName="senhaConfirmacao">
+              <span class="text-danger" *ngIf="form.senhaConfirmacao.touched && form.senhaConfirmacao.invalid">
+                <span *ngIf="form.senhaConfirmacao.errors.required">
+                  Por favor, confirme a senha.
+                </span>
+              </span>
             </div>
             <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-primary">Realizar Cadastro</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!formCriarConta.valid">
+                Realizar Cadastro
+              </button>
             </div>
+
+
           </form>
+
+
           <div class="text-center mt-3">
             <a [routerLink]="['/autenticar']">Voltar</a> para a página de autenticação.
           </div>
