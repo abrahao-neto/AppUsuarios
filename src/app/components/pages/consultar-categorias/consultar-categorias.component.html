@@ -1,1 +1,54 @@
-<p>consultar-categorias works!</p>
+<div class="card m-4">
+    <div class="card-body">
+        <h4>Consulta de categorias</h4>
+        <p>Listagem de categorias cadastradas.</p>
+        <hr />
+
+        <div *ngIf="mensagem_sucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{mensagem_sucesso}}</strong>
+            <button type="button" class="btn-close" (click)="mensagem_sucesso=''" aria-label="Close"></button>
+        </div>
+
+        <div *ngIf="mensagem_erro" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{mensagem_erro}}</strong>
+            <button type="button" class="btn-close" (click)="mensagem_erro=''" aria-label="Close"></button>
+        </div>
+
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Nome da categoria</th>
+                    <th>Descrição</th>
+                    <th>Cadastrado em</th>
+                    <th>Atualizado em</th>
+                    <th>Operações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let c of categorias">
+                    <td>{{c.nome}}</td>
+                    <td>{{c.descricao}}</td>
+                    <td>{{c.dataHoraCriacao | date : 'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{c.dataHoraUltimaAlteracao | date : 'dd/MM/yyyy HH:mm'}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" [routerLink]="['/editar-categorias', c.idCategoria]">
+                            Editar
+                        </button>
+                        &nbsp;
+                        <button class="btn btn-sm btn-danger" (click)="onDelete(c.idCategoria)">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5">
+                        Quantidade de categorias: {{categorias.length}}
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>

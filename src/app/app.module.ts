@@ -18,6 +18,7 @@ import { ConsultarCategoriasComponent } from './components/pages/consultar-categ
 import { EditarCategoriasComponent } from './components/pages/editar-categorias/editar-categorias.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

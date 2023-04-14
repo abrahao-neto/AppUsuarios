@@ -1,1 +1,87 @@
-<p>consultar-produtos works!</p>
+<div class="card m-4">
+  <div class="card-body">
+    <h4>Consulta de produtos</h4>
+    <p>Listagem de produtos cadastrados.</p>
+    <hr />
+
+
+    <div *ngIf="mensagem_sucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{mensagem_sucesso}}</strong>
+      <button type="button" class="btn-close" (click)="mensagem_sucesso=''" aria-label="Close"></button>
+    </div>
+
+
+    <div *ngIf="mensagem_erro" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{mensagem_erro}}</strong>
+      <button type="button" class="btn-close" (click)="mensagem_erro=''" aria-label="Close"></button>
+    </div>
+
+
+    <form [formGroup]="formConsultarProdutos" (ngSubmit)="onSubmit()">
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <label>Selecione a categoria desejada:</label>
+          <select class="form-select" formControlName="idCategoria">
+            <option value="">Escolha uma opção</option>
+            <option *ngFor="let c of categorias" value="{{c.idCategoria}}">
+              {{c.nome}} | {{c.descricao}}
+            </option>
+          </select>
+          <span class="text-danger" *ngIf="form.idCategoria.touched && form.idCategoria.invalid">
+            <span *ngIf="form.idCategoria.errors.required">
+              Por favor, informe a categoria do produto.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-primary" value="Realizar Consulta" />
+        </div>
+      </div>
+    </form>
+
+
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>Nome do produto</th>
+          <th>Descrição</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Cadastrado em</th>
+          <th>Atualizado em</th>
+          <th>Operações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of produtos">
+          <td>{{p.nome}}</td>
+          <td>{{p.descricao}}</td>
+          <td>{{p.preco | currency : 'R$ '}}</td>
+          <td>{{p.quantidade}}</td>
+          <td>{{p.dataHoraCriacao | date : 'dd/MM/yyyy HH:mm'}}</td>
+          <td>{{p.dataHoraUltimaAlteracao | date : 'dd/MM/yyyy HH:mm'}}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/editar-produtos', p.idProduto]">
+              Editar
+            </button>
+            &nbsp;
+            <button class="btn btn-sm btn-danger" (click)="onDelete(p.idProduto)">
+              Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7">
+            Quantidade de produtos: {{produtos.length}}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+
+  </div>
+</div>

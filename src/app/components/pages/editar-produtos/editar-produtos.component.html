@@ -1,1 +1,92 @@
-<p>editar-produtos works!</p>
+<div class="card m-4">
+  <div class="card-body">
+    <h4>Edição de produtos</h4>
+    <p>Preencha os campos do formulário para alterar os dados do produto</p>
+    <hr />
+
+
+    <div *ngIf="mensagem_sucesso" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>{{mensagem_sucesso}}</strong>
+      <button type="button" class="btn-close" (click)="mensagem_sucesso=''" aria-label="Close"></button>
+    </div>
+
+
+    <div *ngIf="mensagem_erro" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>{{mensagem_erro}}</strong>
+      <button type="button" class="btn-close" (click)="mensagem_erro=''" aria-label="Close"></button>
+    </div>
+
+
+    <form [formGroup]="formEditarProduto" (ngSubmit)="onSubmit()">
+
+
+      <!-- campo oculto -->
+      <input type="hidden" formControlName="idProduto" />
+
+
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <label>Nome do produto:</label>
+          <input type="text" class="form-control" formControlName="nome" />
+          <span class="text-danger" *ngIf="form.nome.touched && form.nome.invalid">
+            <span *ngIf="form.nome.errors.required">
+              Por favor, informe o nome do produto.
+            </span>
+          </span>
+        </div>
+        <div class="col-md-3">
+          <label>Preço do produto:</label>
+          <input type="text" class="form-control" formControlName="preco" />
+          <span class="text-danger" *ngIf="form.preco.touched && form.preco.invalid">
+            <span *ngIf="form.preco.errors.required">
+              Por favor, informe o preço do produto.
+            </span>
+          </span>
+        </div>
+        <div class="col-md-3">
+          <label>Quantidade do produto:</label>
+          <input type="text" class="form-control" formControlName="quantidade" />
+          <span class="text-danger" *ngIf="form.quantidade.touched && form.quantidade.invalid">
+            <span *ngIf="form.quantidade.errors.required">
+              Por favor, informe a quantidade do produto.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <label>Selecione a categoria do produto:</label>
+          <select class="form-select" formControlName="idCategoria">
+            <option value="">Escolha uma opção</option>
+            <option *ngFor="let c of categorias" value="{{c.idCategoria}}">
+              {{c.nome}} | {{c.descricao}}
+            </option>
+          </select>
+          <span class="text-danger" *ngIf="form.idCategoria.touched && form.idCategoria.invalid">
+            <span *ngIf="form.idCategoria.errors.required">
+              Por favor, informe a categoria do produto.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <label>Descrição do produto categoria:</label>
+          <textarea class="form-control" formControlName="descricao"></textarea>
+          <span class="text-danger" *ngIf="form.descricao.touched && form.descricao.invalid">
+            <span *ngIf="form.descricao.errors.required">
+              Por favor, informe a descrição do produto.
+            </span>
+          </span>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <input type="submit" class="btn btn-primary" value="Salvar Alterações" />
+        </div>
+      </div>
+    </form>
+
+
+  </div>
+</div>
